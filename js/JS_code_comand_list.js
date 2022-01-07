@@ -34,3 +34,14 @@ arr.forEach(function(item, i, arr) {
 function compareNum(a, b) {
     return a - b;
 }
+
+/* Функция для перебора объекта и создания его копии */
+function copyObj(mainObj) {
+    let objCopy = {};
+
+    let key;
+    for (key in mainObj) {
+        objCopy[key] = mainObj[key];
+    }
+    return objCopy;
+}
