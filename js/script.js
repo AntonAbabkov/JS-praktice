@@ -572,5 +572,140 @@ console.log(newObj);
 
 
 /* -----------------------------------------------------------------------------------------------------------------------------------------------
-10 урок: Основы ООП, прототипно-ориентированное наследование*/
+10 урок: Основы ООП, прототипно-ориентированное наследование - один из стилей объектно ореинтированного программированния (ООП)/
+Любые конструкции протативно наследуются от объекта*/
 
+/* 1 пример */
+let str = 'some';
+let strObj = new String(str);
+
+console.log(typeof(str));
+console.log(typeof(strObj));
+
+console.dir([1, 2, 3]);
+
+/* 2 пример. Наследование свойств. */
+
+const soldier = { //Создал прототип
+    health: 400,
+    armor: 100,
+    sayHello: function() {
+        console.log('Hello');
+    }
+};
+
+const jonh = { //Создал новый объект с изменённый хар-кой.
+    health: 100
+}
+
+/* jonh.__proto__ = soldier; */ //Устаревшая конструкция, не используется
+
+Object.setPrototypeOf(jonh, soldier); //Актуальная конструкция для наследования свойств. 1 арг - кто наследует, 2 арг - от кого.
+
+console.log(jonh); //Видим только 1 изначальное свойство
+console.log(jonh.armor); //Видим второе свойство, унаследованное от прототипа
+jonh.sayHello(); //Обращение к ключу SayHello, так же унаследованного объектом john от soldier
+
+/* 3 пример */
+
+const soldier = { //Создал прототип
+    health: 400,
+    armor: 100,
+    sayHello: function() {
+        console.log('Hello');
+    }
+};
+
+const jonh = Object.create(soldier); //Создание нового объекта сразу с указанием его прототипа
+jonh.sayHello();
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+11 урок: Практика , ч4. Используем объекты */
+
+/* Задание на урок:
+
+1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
+перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
+Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
+
+2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
+переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
+
+3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
+Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
+при помощи метода forEach вывести в консоль сообщения в таком виде:
+"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
+
+let numbersOfFilms;
+
+function start() {
+    numbersOfFilms = +prompt("Сколько фильмов вы смотрели?", "");
+
+    while (numbersOfFilms == '' || numbersOfFilms == null || isNaN(numbersOfFilms)) { //метод isNaN проверяет значение, если оно не число, возвращает true.
+        numbersOfFilms = +prompt("Сколько фильмов вы смотрели?", "");
+    }
+}
+
+start();
+
+const personalMovieDB = { 
+    count: numbersOfFilms, 
+    movies: {}, 
+    actors: {}, 
+    genres: [], 
+    privat: false
+};
+
+function rememberMyFilms() {
+    for (var i = 0; i < 2; i++) {
+        let a = prompt('Один из последних просмотренных фильмов?', ''), 
+            b = +prompt('На сколько оцените его?', '');
+            if (a == "" || b == "" || a.length > 50 || a == null || b == null) {
+                alert('Введены неккоректные данные');
+                i--;
+            } else {
+                personalMovieDB.movies[a] = b;
+            }
+    }
+}
+rememberMyFilms();
+
+function detectPersonalLevel() {
+    if (personalMovieDB.count <= 10) {
+        alert("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDB.count > 10 && personalMovieDB.count <= 30) {
+        alert("Вы классический зритель");
+    } else if (personalMovieDB.count > 30) {
+        alert("Вы киноман");
+    } else {
+        alert("Произошла ошибка");
+    }
+}
+
+detectPersonalLevel();
+
+console.log(personalMovieDB);
+
+function showMyDB() {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    } else {
+        alert('Ошибка');
+    }
+}
+
+showMyDB();
+
+
+function writeYourGenres() {
+    for (let i = 1; i <= 3; i++) {
+        const genre = prompt(`Ваш любимый жанр под номером ${i}`, '');
+            if (genre == null || genre == '') {
+                i--;
+            } else {
+                personalMovieDB.genres[i - 1] = genre;
+            }
+    }
+}    
+writeYourGenres();
