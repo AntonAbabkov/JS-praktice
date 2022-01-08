@@ -511,7 +511,66 @@ const numbers = {
 
 const newNumbers = copy(numbers); //Создание поверхностной копии
 
-newNumbers.a = 10;
+newNumbers.a = 10; //Изменения на первом уровне не влияют на ключи-значения начального объекта.
+newNumbers.c.x = 10; //Ключи-значения на втором уровне передаются уже по ссылке и будут изменять изначальный объект.
 
 console.log(newNumbers);
 console.log(numbers);
+
+const add = {
+    d: 17,
+    e: 20
+};
+
+console.log(Object.assign(numbers, add)); //С помощью метода Object.assign данные из объекта add добавлены в объект numbers. Используется для копирования значений всех собственных перечисляемых свойств из одного или более исходных объектов в целевой объект. После копирования он возвращает целевой объект.
+console.log(numbers);
+
+const clone = Object.assign({}, add);
+clone.d = 20;
+console.log(add);
+console.log(clone);
+
+/* 3 пример. Копия массива */
+
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice(); //метод slice() позволяет возвратить новый массив, который содержит копии элементов, вырезанных из исходного массива.
+
+newArray[1] = '1';
+console.log(newArray);
+console.log(oldArray);
+
+/* 4 пример. Оператор разворота Spread. Синтаксис ... (три точки + название массива) */
+
+const video = ['youtube', 'vimeo', 'rutube'],
+      blogs = ['wordpress', 'livejournal', 'blogger'],
+      internet = [...video, ...blogs, 'vk', 'facebook']; //Оператор разворота Spread добавляет данные ключей-значений из исходного объекта. Он не вкладывает один массив в другой, он разделяет этот массив на отдельные значения, превращая массив в набор параметров.
+
+console.log(internet);
+
+
+function log(a, b ,c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+const num = [2, 5, 7];
+log(...num);
+
+/* 5 пример. Быстрые копии с помощью Spread */
+
+const array = ['a', 'b'];
+const newAarray = [...array];
+
+
+const q = {
+    one: 1,
+    two: 2
+};
+const newObj = {...q};
+console.log(newObj);
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+10 урок: Основы ООП, прототипно-ориентированное наследование*/
+

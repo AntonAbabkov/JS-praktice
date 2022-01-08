@@ -45,3 +45,6 @@ function copyObj(mainObj) {
     }
     return objCopy;
 }
+
+//Создание клона объекта
+const ObjName = Object.assign({}, objSource);
