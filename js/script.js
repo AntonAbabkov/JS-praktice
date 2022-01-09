@@ -637,18 +637,17 @@ jonh.sayHello();
 при помощи метода forEach вывести в консоль сообщения в таком виде:
 "Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
-let numbersOfFilms;
-
 const personalMovieDB = { 
-    count: numbersOfFilms, 
+    count: 0, 
     movies: {}, 
     actors: {}, 
     genres: [], 
     privat: false,
     start: function() {
-        numbersOfFilms = +prompt("Сколько фильмов вы смотрели?", "");
-        while (numbersOfFilms == '' || numbersOfFilms == null || isNaN(numbersOfFilms)) { //метод isNaN проверяет значение, если оно не число, возвращает true.
-            numbersOfFilms = +prompt("Сколько фильмов вы смотрели?", "");
+        personalMovieDB.count = +prompt("Сколько фильмов вы смотрели?", "");
+
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) { //метод isNaN проверяет значение, если оно не число, возвращает true.
+            personalMovieDB.count = +prompt("Сколько фильмов вы смотрели?", "");
         }
     },
     rememberMyFilms: function() {
@@ -664,11 +663,11 @@ const personalMovieDB = {
         }
     },
     detectPersonalLevel: function() {
-        if (numbersOfFilms <= 10) {
+        if (personalMovieDB.count <= 10) {
             alert("Просмотрено довольно мало фильмов");
-        } else if (numbersOfFilms > 10 && numbersOfFilms <= 30) {
+        } else if (personalMovieDB.count > 10 && personalMovieDB.count <= 30) {
             alert("Вы классический зритель");
-        } else if (numbersOfFilms > 30) {
+        } else if (personalMovieDB.count > 30) {
             alert("Вы киноман");
         } else {
             alert("Произошла ошибка");
@@ -683,15 +682,20 @@ const personalMovieDB = {
     },
     writeYourGenres: function() {
         for (let i = 1; i <= 3; i++) {
-            const genre = prompt(`Ваш любимый жанр под номером ${i}`, '');
-                if (genre == null || genre == '') {
+                const genre = prompt(`Ваш любимый жанр под номером ${i}`, '');
+
+                if (genre === null || genre == '') {
+                    console.log('ВВедены некоректные данные');
                     i--;
                 } else {
                     personalMovieDB.genres[i - 1] = genre;
                 }
-        }
-    },
+            }
 
+            personalMovieDB.genres.forEach((item, i) => { // => обозначение функции, эквивалентно "personalMovieDB.genres.forEach(function(item, i) {...}"
+                console.log(`Любимый жанр ${i + 1} - это ${item}`);
+            })
+    },
     toggleVisibleMyDB: function() {
         if (personalMovieDB.privat == false) {
             personalMovieDB.privat = true;
@@ -708,7 +712,3 @@ personalMovieDB.writeYourGenres();
 personalMovieDB.toggleVisibleMyDB();
 
 console.log(personalMovieDB);
-
-personalMovieDB.genres.forEach(function(item, i, genre) {
-    console.log(`Любимый жанр ${i + 1} - это ${item}`);
-})
