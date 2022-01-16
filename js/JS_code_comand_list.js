@@ -34,6 +34,10 @@ arr.forEach(function(item, i, arr) {
 function compareNum(a, b) {
     return a - b;
 }
+//Функция для сортировки строкового массива
+const sortArr = (arr) => {
+    arr.sort();
+};
 
 /* Функция для перебора объекта и создания его копии */
 function copyObj(mainObj) {
