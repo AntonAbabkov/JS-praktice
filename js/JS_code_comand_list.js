@@ -52,3 +52,11 @@ function copyObj(mainObj) {
 
 //Создание клона объекта
 const ObjName = Object.assign({}, objSource);
+
+//Функция для добавления script файла с помощью JavaScript.
+function loadScript(src) {                           
+    const script = document.createElement('script'); //Создали переменную в которую помещаем новосозданный элемент
+    script.src = src;                                //Путь будет равен тому, который будет указан в вызове функции
+    script.async = false;                            //Этот код позволит скрипту работать в обычном режиме
+    document.body.append(script);                    //Добавление файла в body
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    
+</head>
+<body>
+     <!-- атрибут defer, у тэга script, сообщает браузеру, что бы он продолжал загружать DOM структуру сайта, а файл со скриптами грузил дальше в фоновом режиме. При указании атрибута defer скрипт начнёт работать только после полной загрузки. Если есть несколько файлов JS и в них во всех будет атрибут defer, тогда они будут выполняться строго по порядку.-->
+
+    <!-- атрибут async (асинхронные скрипты), у тэга script, тоже позволяет загружать скрипт файл в фоновом режиме, но такой файл не будет ждать другие файлы и запуститься сразу после загрузки, другие скрипты тоже не ждут скрипты с атрибутом async-->
+
+    
+    <p>Hello world</p>
+    <p>second message</p>
+    <script src="js/defer_dinamic_script.js"></script>
+</body>
+</html>
